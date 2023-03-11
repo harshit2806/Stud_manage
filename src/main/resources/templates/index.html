@@ -22,6 +22,9 @@
             <thead>
                 <tr>
                     <th>
+                        <a th:href="@{'/page/'+${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Student Id</a>
+                    </th>
+                    <th>
                         <a th:href="@{'/page/'+${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">Student First Name</a>
                     </th>
                     <th>
@@ -35,6 +38,7 @@
             </thead>
             <tbody>
                 <tr th:each="employee : ${listEmployees}">
+					<td th:text="${employee.id}"></td>
                     <td th:text="${employee.firstName}"></td>
                     <td th:text="${employee.LastName}"></td>
                     <td th:text="${employee.email}"></td>
