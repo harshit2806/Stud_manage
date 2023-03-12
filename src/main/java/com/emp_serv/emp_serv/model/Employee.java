@@ -3,6 +3,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,7 +20,16 @@ public class Employee {
     private String lastName;
     @Column(name="Email")
     private String email;
-    
+    @Column(name = "del_flag" )
+	@ColumnDefault("0")
+	private int del;
+	public int getDel() {
+		return del;
+	}
+
+	public void setDel(int del) {
+		this.del = del;
+	}
 	@Column (name = "Created_At", nullable = false, updatable= false)
 	@CreationTimestamp 
 	private Timestamp createdAt;

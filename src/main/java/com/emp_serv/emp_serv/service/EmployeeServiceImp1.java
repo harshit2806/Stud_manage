@@ -17,7 +17,7 @@ public class EmployeeServiceImp1 implements EmployeeService {
     @Override
     public List<Employee> getAllEmployees() {
         // TODO Auto-generated method stub
-        return employeeRepository.findAll();
+        return employeeRepository.findbydelCustomQuery(0);
     }
 
     @Override
@@ -43,7 +43,12 @@ public class EmployeeServiceImp1 implements EmployeeService {
     @Override
     public void deleteEmployeeById(Long id) {
         // TODO Auto-generated method stub
-        this.employeeRepository.deleteById(id);
+    	Optional<Employee> optional = employeeRepository.findById(id);
+    	Employee employee = null;
+    	employee = optional.get();
+    	employee.setDel(1);
+    	saveEmployee(employee);
+    	
     }
 
     @Override
@@ -52,7 +57,8 @@ public class EmployeeServiceImp1 implements EmployeeService {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
                 : Sort.by(sortField).descending();
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return this.employeeRepository.findAll(pageable);
+        
+        return this.employeeRepository.findbydelCustomQuery1( pageable );
     }
 
 }
